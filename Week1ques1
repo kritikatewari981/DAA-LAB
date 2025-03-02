@@ -1,0 +1,40 @@
+#include<iostream>//time complexity of linear search is O(n) and in best case it is O(1)
+using namespace std;
+void linearsearch(int arr[],int n,int x)
+{
+
+    int found=0;
+    int i;
+    for(i=0;i<n;i++)
+    {
+        if(arr[i]==x)
+        {
+            found++;
+            cout<<"the element is present"<<endl;
+            cout<<"comparisons are"<<i+1<<endl;
+            break;
+        }
+    }
+    if(found==0)
+    {
+        cout<<"the element is not present"<<endl;
+    }
+}
+
+int main()
+{
+    int n,i,x;
+    cout<<"enter the size of array ";
+    cin>>n;
+    int arr[n];//declaration
+    cout<<"enter the elements of array ";
+    for(i=0;i<n;i++)
+    {
+        cin>>arr[i];//input of elemets
+    }
+    cout<<"enter the element to be searched ";
+    cin>>x;
+    linearsearch(arr,n,x);
+    return 0;
+}
+
