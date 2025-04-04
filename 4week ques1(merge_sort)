@@ -1,0 +1,80 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void merge(int arr[], int start, int mid, int end, int &comparison, int &inversion)
+{
+    int index = 0;
+    int left = start;
+    int right = mid + 1;
+
+    vector<int> temp(end - start + 1);
+    while (left <= mid && right <= end)
+    {
+        comparison++;
+        if (arr[left] <= arr[right])
+        {
+            temp[index] = arr[left];
+            left++;
+        }
+        else
+        {
+            inversion += (mid - left + 1);
+            temp[index] = arr[right];
+            right++;
+        }
+        index++;
+    }
+    while (left <= mid)
+    {
+        temp[index] = arr[left];
+        left++;
+        index++;
+    }
+    while (right <= end)
+    {
+        temp[index] = arr[right];
+        right++;
+        index++;
+    }
+
+    // Copy sorted temp array back to original array
+    for (int i = 0; i < temp.size(); i++)
+    {
+        arr[start + i] = temp[i];
+    }
+}
+
+void mergesort(int arr[], int start, int end, int &comparison, int &inversion)
+{
+    if (start >= end)
+    {
+        return;
+    }
+
+    int mid = start + (end - start) / 2;
+    mergesort(arr, start, mid, comparison, inversion);
+    mergesort(arr, mid + 1, end, comparison, inversion);
+    merge(arr, start, mid, end, comparison, inversion);
+}
+
+int main()
+{
+    int comparison = 0;
+    int inversion = 0;
+    int arr[6] = {5, 4, 3,8,2,9};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    mergesort(arr, 0, n - 1, comparison, inversion);
+
+    // Printing sorted array
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << "\n";
+
+    cout << "The number of comparisons is " << comparison << endl;
+    cout << "The number of inversions is " << inversion << endl;
+    return 0;
+}
