@@ -1,3 +1,5 @@
+question :-Given a sorted array of positive integers containing few duplicate elements, design an algorithm and implement it using a program to find whether the given key element is present in the array or not. If present, then also find the number of copies of given key. (Time Complexity = O(log n))
+ans:-
 #include <iostream>                                            //search key and printing the no. of copies
 using namespace std;                                          //time complexity is o(logn),space complexity is o(1)
 int binarysearch(int arr[], int size, int key, int freq)
