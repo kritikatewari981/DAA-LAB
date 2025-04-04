@@ -1,0 +1,56 @@
+#include<iostream>        //jump search
+#include<math.h>
+using namespace std;
+void jumpsearch(int arr[],int n,int key)
+{
+    int m=sqrt(n);
+    int i=0,comparison=0;
+    while(arr[min(m,n)-1]<key)
+    {
+        comparison++;
+        i=m;
+        m=m+sqrt(n);
+        if(i>=n)
+        {
+            cout<<"element is not found \n";
+            cout<<"comparisons are "<<comparison<<endl;
+            return;
+        }
+    }
+    //linear search phase
+    while(arr[i]<key)
+    {
+        comparison++;
+        i++;
+        if(i==min(m,n))
+        {
+            cout<<"element is not found\n";
+            cout<<"comparisons are "<<comparison<<endl;
+            return;
+        }
+    }
+    //final comparison when element is found
+    if(arr[i]==key)
+    {
+        comparison++;
+        cout<<"element is present at index "<<i<<endl;
+        cout<<"comparisons are "<<comparison<<endl;
+    }
+}
+int main()
+{
+    int n,i,x;
+    cout<<"enter the size of array ";
+    cin>>n;
+    int arr[n];//declaration
+    cout<<"enter the elements of array ";
+    for(i=0;i<n;i++)
+    {
+        cin>>arr[i];//input of elemets
+    }
+    cout<<"enter the element to be searched ";
+    cin>>x;
+    jumpsearch(arr,n,x);
+    return 0;
+
+}
