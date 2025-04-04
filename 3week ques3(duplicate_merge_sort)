@@ -1,3 +1,6 @@
+Given an unsorted array of positive integers, design an algorithm and implement it using a program to find whether there are any duplicate elements in the array or not. (use sorting) (Time Complexity = O(n log n))
+ans:- we will use merge sort as time complexity of merge sort in nlogn and the total time complexity of the code is coming nlogn+n=o(nlong)(dominating factor)
+
 #include <iostream>
 #include <vector>
 using namespace std;
