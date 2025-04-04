@@ -1,0 +1,98 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+void merge(int arr[], int low, int mid, int high)
+{
+    int index = 0;
+    int left = low;
+    int right = mid + 1;
+    vector<int> temp(high - low + 1);
+    while (left <= mid && right <= high)
+    {
+        if (arr[left] <= arr[right])
+        {
+            temp[index] = arr[left];
+            index++;
+            left++;
+        }
+        else
+        {
+            temp[index] = arr[right];
+            index++;
+            right++;
+        }
+    }
+    // elements are remaining in left array
+    while (left <= mid)
+    {
+        temp[index] = arr[left];
+        index++;
+        left++;
+    }
+    // elements are remaining in right array
+    while (right <= high)
+    {
+        temp[index] = arr[right];
+        index++;
+        right++;
+    }
+    // copying the elements
+    index = 0;
+    while (low <= high)
+    {
+        arr[low] = temp[index];
+        low++;
+        index++;
+    }
+}
+void mergesort(int arr[], int low, int high)
+{
+    if (low >= high)
+    {
+        return;
+    }
+    else
+    {
+        int mid = low + (high - low) / 2;
+        mergesort(arr, low, mid);
+        mergesort(arr, mid + 1, high);
+        merge(arr, low, mid, high);
+    }
+}
+int main()
+{
+    int i;
+    int count = 0;
+    int arr[10] = {9, 3, 2, 8, 6, 4, 5, 0, 1, 7};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    mergesort(arr, 0, n - 1);
+    
+    // printing sorted array
+    for (i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout<<"\n";
+    // finding duplicate
+    for (i = 0; i < n - 1; i++)
+    {
+        if (arr[i] == arr[i + 1])
+        {
+            count = 0;
+            break;
+        }
+        else
+        {
+            count++;
+        }
+    }
+    if (count == 0)
+    {
+        cout << "duplicates are prsent" << endl;
+    }
+    else
+    {
+        cout << "no duplicates found" << endl;
+    }
+    return 0;
+}
