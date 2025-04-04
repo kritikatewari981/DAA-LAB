@@ -1,0 +1,66 @@
+#include <iostream>                                            //search key and printing the no. of copies
+using namespace std;                                          //time complexity is o(logn),space complexity is o(1)
+int binarysearch(int arr[], int size, int key, int freq)
+{
+    int low = 0;
+    int high = size - 1;
+    int index=-1;
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] == key)
+        {
+            index = mid;
+            if (freq)
+            {
+                high = mid - 1;
+            }
+            else
+            {
+                low = mid + 1;
+            }
+        }
+        else if (arr[mid] < key)
+        {
+            low = mid + 1;
+        }
+        else
+        {
+            high = mid - 1;
+        }
+    }
+    return index;
+}
+
+int findoccurances(int arr[], int size, int key)
+{
+    int firstoccur = binarysearch(arr, size, key, 1);
+    if(firstoccur==-1)
+    {
+        return 0;
+    }
+    int lastoccur = binarysearch(arr, size, key, 0);
+    if(lastoccur==-1)
+    {
+        return 0;
+    }
+    return lastoccur-firstoccur+1;
+}
+int main()
+{
+    int key, occurance;
+    int arr[] = {201, 205, 205, 205, 301, 340, 780, 870};
+    int size = sizeof(arr);
+    cout << "enter the elements to be search";
+    cin >> key;
+    occurance = findoccurances(arr, size, key);
+    if (occurance > 0)
+    {
+        cout << "the key  "<< key << " has occurances " << occurance;
+    }
+    else
+    {
+        cout << "the key not found" << endl;
+    }
+    return 0;
+}
