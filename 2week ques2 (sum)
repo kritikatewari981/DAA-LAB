@@ -1,0 +1,88 @@
+#include<iostream>                    
+using namespace std;
+void findtriplets(int arr[],int range)
+{
+    int i,j,k;
+    int found=1;
+    for(int i=0;i<range-2;i++)
+    {
+        for(j=i+1;j<range-1;j++)
+        {
+            for(k=j+1;k<range;k++)
+            {
+                if(arr[i]+arr[j]==arr[k]||arr[j]+arr[k]==arr[i]||arr[i]+arr[k]==arr[j])
+                {
+                    cout<<found<<" index that support triplets is"<<i<<j<<k<<endl;
+                    found++;
+                }
+            }
+        }
+    }
+    if(found==1)
+    {
+        cout<<"sequnce not found"<<endl;
+    }
+}
+int main()
+{
+    int t,i,range;
+    cout<<"enter the numeber of test cases";
+    cin>>t;
+    while(t)
+    {
+        cout<<"enter the size of array";
+        cin>>range;
+        int arr[range];
+        cout<<"enter the elements of array";
+        for(i=0;i<range;i++)
+        {
+            cin>>arr[i];      
+          }
+          findtriplets(arr,range);
+       t--;
+    }
+    return 0;
+}
+
+
+
+methode 2:- use of 2 sum approach
+#include<iostream>
+using namespace std;
+void sum(int arr[],int n)
+{
+    int j;
+    int k;
+   bool found=false;
+    for(int i=n-1;i>=2;i--)
+    {
+        j=0;
+        k=i-1;
+        while(j<k){
+                if(arr[j]+arr[k]==arr[i])
+                {
+                  cout<<"tripletes indexes are"<<i<<","<<j<<","<<k<<endl;
+                  j++;
+                  k--;
+                  found=true;
+                }else if(arr[j]+arr[k]<arr[i])
+                {
+                   j++;
+                }
+                else{
+                    k--;
+                }
+            }
+        }
+        if(found==false)
+        {
+            cout<<"no sequence found";
+        }
+    }
+    
+int main()
+{
+    int arr[]={0,1,2,3,4,5,6,7,8,9};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    sum(arr,n);
+}
